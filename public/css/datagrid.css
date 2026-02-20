@@ -1,0 +1,61 @@
+.ats-datagrid {
+  position: relative;
+  clear: both;
+  padding-right: 2px;
+  /* evita la activacion de la scroll bar */
+  padding-bottom: 2px;
+  /* evita la activación de la scroll bar */
+  margin: 5px;
+  /* overflow: auto; */
+  border: 1px solid aqua;
+}
+
+.ats-datagrid * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.ats-datagrid div.body {
+  overflow: auto;
+}
+
+.ats-datagrid div.body>table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.ats-datagrid div.body>table>thead>tr>th,
+.ats-datagrid div.body>table>tbody>tr>td,
+.ats-datagrid div.body>table>tfoot>tr>td {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* ------------------------------------
+  ACTION
+------------------------------------ */
+.ats-datagrid .action {
+  cursor: pointer;
+  margin: 0 2px;
+}
+
+/* ------------------------------------
+  MENU OPTIONS
+------------------------------------ */
+.ats-datagrid div.body td.menu-options div.content {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  opacity: 0.9;
+}
+
+.ats-datagrid div.body td.menu-options div.content.show {
+  display: block;
+  transition: 0.5s;
+}
+
+.ats-datagrid div.body td.menu-options div.content a.option {
+  display: block;
+}

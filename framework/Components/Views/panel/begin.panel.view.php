@@ -1,0 +1,1 @@
+<div id="<?= $this->name ?>-<?= $position ?>" class="panel <?= $position ?>">
