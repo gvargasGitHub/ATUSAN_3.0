@@ -33,7 +33,7 @@ abstract class Application extends OwnerBase implements ApplicationInterface
 
   public function cssResources()
   {
-    $dirs = array_merge([
+    $dirs = [
       'reset.css',
       'flexbox.css',
       'alerts.css',
@@ -47,9 +47,12 @@ abstract class Application extends OwnerBase implements ApplicationInterface
       'panels.css',
       'tabgroup.css',
       'sidebar.css'
-    ], $this->css);
+    ];
     $content = '';
     foreach ($dirs as $css)
+      $content .= file_get_contents(APP_ROOT . '\\framework\\Statics\\css\\' . $css) . "\n";
+
+    foreach ($this->css as $css)
       $content .= file_get_contents(APP_ROOT . '\\public\\css\\' . $css) . "\n";
 
     return "<style>\n{$content}\n</style>";
@@ -57,14 +60,17 @@ abstract class Application extends OwnerBase implements ApplicationInterface
 
   public function jsResources()
   {
-    $dirs = array_merge([
+    $dirs = [
       'atusan.js',
       'controls.js',
       'components.js',
       'owners.js'
-    ], $this->js);
+    ];
     $content = '';
     foreach ($dirs as $js)
+      $content .= file_get_contents(APP_ROOT . '\\framework\\Statics\\js\\' . $js) . "\n";
+
+    foreach ($this->js as $js)
       $content .= file_get_contents(APP_ROOT . '\\public\\js\\' . $js) . "\n";
 
     return "<script>\n{$content}\n</script>";

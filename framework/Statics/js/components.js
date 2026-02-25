@@ -525,6 +525,9 @@ class DataGrid extends DataViewBase {
       if (view.controls.lastIndexOf(control) == -1) view.controls.push(control);
     });
 
+    const checkBoxs = this.element.querySelectorAll(".changeEv");
+    checkBoxs.forEach(el => el.addEventListener("change", DataGrid.handlerTableDataEvent));
+
     const mopt = this.element.querySelectorAll("table>tbody.detail>tr>td.menu-options div.content a.option");
 
     mopt.forEach(el => {
@@ -557,15 +560,19 @@ class DataGrid extends DataViewBase {
   }
 
   getItem(row, control) {
+    // obtiene la celda (td)
     const el = this.element.querySelector(`#${this.name}-${control}-${row}`);
 
     if (el == null) throw new Error(`${control}-${row} no existe en ${this.name}`);
-
+    // en cada celda se ha definido el tipo de control
     let type = el.getAttribute("type");
 
     let resolver = {
       data: () => el.innerText,
-      checkbox: () => (el.firstElementChild.checked) ? 1 : 0,
+      checkbox: () => {
+        let cbx = el.querySelector('input[type="checkbox"]');
+        return (cbx.checked) ? 1 : 0;
+      },
       hidden: () => el.value,
       state: () => el.getAttribute('value')
     };

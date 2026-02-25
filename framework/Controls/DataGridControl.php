@@ -94,7 +94,7 @@ class DataGridControl extends DataViewControlBase
     <td class="data" id="<?= $this->getId() ?>" type="checkbox"
       <?= $this->xml->buildPairs(' ', '=', '"', 'html') ?>
       style="<?= $this->xml->buildPairs(';', ':', '', 'css') ?>">
-      <Input type="checkbox" id="<?= $this->getId() ?>" name="<?= $this->name ?>" value="<?= $this->getValue() ?>" <?= $selected ?> />
+      <Input type="checkbox" id="<?= $this->getId() ?>-input" name="<?= $this->name ?>" value="<?= $this->getValue() ?>" <?= $selected ?> />
     </td>
   <?php
   }
@@ -126,7 +126,7 @@ class DataGridControl extends DataViewControlBase
         ?>
       </div>
     </td>
-    <?php
+  <?php
   }
 
   public function menuOptionType($xml)
@@ -138,16 +138,16 @@ class DataGridControl extends DataViewControlBase
 
   protected function InputSwitch()
   {
-    if ($this->xml->hasAttribute('label')) {
-    ?>
-      <Label for="<?= $this->getId() ?>" class="form-label"><?= $this->xml->getAttribute('label') ?></Label>
-    <?php
-    }
-    ?>
-    <label class="switch">
-      <Input type="checkbox" class="changeEv" id="<?= $this->getId() ?>" name="<?= $this->name ?>" value="<?= $this->getValue() ?>" />
-      <Span class="slider"></Span>
-    </label>
+    $selected = ($this->getValue() == 1) ? 'checked' : '';
+  ?>
+    <td class="data" id="<?= $this->getId() ?>" type="checkbox"
+      <?= $this->xml->buildPairs(' ', '=', '"', 'html') ?>
+      style="<?= $this->xml->buildPairs(';', ':', '', 'css') ?>">
+      <label class="switch" id="<?= $this->getId() ?>-switch">
+        <Input type="checkbox" class="changeEv" id="<?= $this->getId() ?>-input" name="<?= $this->name ?>" value="<?= $this->getValue() ?>" <?= $selected ?> />
+        <Span class="slider" id="<?= $this->getId() ?>-slider"></Span>
+      </label>
+    </td>
 <?php
   }
 }
