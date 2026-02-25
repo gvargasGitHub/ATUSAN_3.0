@@ -9,10 +9,9 @@
 !.gitignore
 
 !/framework/
-!/public/
-/public/css/*.*
-/public/js/*.*
-
+!/public/.htaccess
+!/public/index.php
+!/public/favicon.ico
 
 # ===============================================================
 #   ARCHIVOS QUE DEBEN SER IGNORADOS (SEGURIDAD Y LIMPIEZA)
