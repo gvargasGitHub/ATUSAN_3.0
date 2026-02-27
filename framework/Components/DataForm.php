@@ -116,4 +116,18 @@ class DataForm extends DataViewBase
     }
     trigger_error("El control {$name} no existe para {$this->name}", E_USER_WARNING);
   }
+
+  public function enableControl(string $name, bool $enable)
+  {
+    if (count($this->data) == 0)
+      $this->data[0] = [];
+
+    foreach ($this->controls as $control) {
+      if ($control->name == $name) {
+        if ($control->category == 'Control') $control->object->setEnable($enable);
+        return;
+      }
+    }
+    trigger_error("El control {$name} no existe para {$this->name}", E_USER_WARNING);
+  }
 }

@@ -19,13 +19,12 @@ class XmlExtended extends SimpleXMLElement
    */
   public function setAttribute(string $name, mixed $value, string $namespace = null)
   {
-    $ns = ($namespace) ?: '';
-    $pf = ($namespace);
+    $ns = ($namespace) ?: null;
 
     if ($this->hasAttribute($name, $namespace, 1))
       $this->attributes($namespace, 1)->$name = $value;
     else
-      $this->addAttribute($name, $value, $ns);
+      $this->addAttribute($name, $value, $namespace);
   }
 
   /**

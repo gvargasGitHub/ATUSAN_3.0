@@ -76,5 +76,10 @@ abstract class DataViewControlBase
     $this->row = $r + 1;
   }
 
+  public function setEnable(bool $enable)
+  {
+    $this->xml->setAttribute('html:disabled', 'html', $enable ? '' : 'disabled');
+  }
+
   abstract public function write();
 }

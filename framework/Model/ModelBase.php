@@ -16,13 +16,6 @@ class ModelBase
 
   function __construct()
   {
-    // $this->conn = DBConnection::connect(
-    //   $_ENV['DB_DRIVER'],
-    //   $_ENV['DB_HOST'],
-    //   $_ENV['DB_USER'],
-    //   $_ENV['DB_PASS'],
-    //   $_ENV['DB_NAME']
-    // );
     $this->conn = DBConnection::connect(
       $_ENV[static::$driver],
       $_ENV[static::$host],

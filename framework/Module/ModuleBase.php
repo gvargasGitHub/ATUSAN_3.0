@@ -3,19 +3,17 @@
 namespace Atusan\Module;
 
 use Atusan\Controller\OwnerBase;
+use Atusan\FileSystem\FileSystem;
 use Atusan\Response\Response;
 use Atusan\Xml\XmlLoader;
 use Atusan\Xml\XmlValidator;
 use Dotenv\Dotenv;
-use ReflectionClass;
 
 abstract class ModuleBase extends OwnerBase implements ModuleInterface
 {
   function __construct(public $app, public $uri)
   {
-    $r = new ReflectionClass(get_class($this));
-
-    parent::__construct(basename(get_class($this)), dirname($r->getFileName()));
+    parent::__construct(basename(get_class($this)), FileSystem::getClassDirectory($this));
 
     $this->response = new Response($this);
 
@@ -27,12 +25,15 @@ abstract class ModuleBase extends OwnerBase implements ModuleInterface
   protected function setXmlReference()
   {
     # El archivo XML de un Módulo puede tener las siguiente nomenclatura:
-    //  a) module-directory/{module-name}.xml
-    //  b) module-directory/Components.xml
+    // a) module-directory/{module-name}.xml
+    // b) module-directory/Components.xml
+    // c) app-directory/Components/{module-name}.xml
     if (XmlValidator::fileExists($this->directory . "/{$this->name}.xml"))
       $this->xmlRef = $this->directory . "/{$this->name}.xml";
     elseif (XmlValidator::fileExists($this->directory . "/Components.xml"))
       $this->xmlRef = $this->directory . "/Components.xml";
+    elseif (XmlValidator::fileExists(APP_DIRECTORY . "/Components/{$this->name}.xml"))
+      $this->xmlRef = APP_DIRECTORY . "/Components/{$this->name}.xml";
   }
 
   /** */
@@ -129,12 +130,15 @@ abstract class ModuleBase extends OwnerBase implements ModuleInterface
   public function write()
   {
     // La vista puede tener las siguientes nomenclaturas:
-    //  a) module-directory/[module-name].view.php
-    //  b) module-directory/View.php
+    // a) module-directory/[module-name].view.php
+    // b) module-directory/View.php
+    // c) app-directory/Views/{module-name}.view.php
     if (@file_exists($this->directory . DS . "{$this->name}.view.php"))
       include $this->directory . DS . "{$this->name}.view.php";
     elseif (@file_exists($this->directory . DS . "View.php"))
       include $this->directory . DS . "View.php";
+    elseif (@file_exists(APP_DIRECTORY . DS . "/Views/{$this->name}.view.php"))
+      include APP_DIRECTORY . DS . "/Views/{$this->name}.view.php";
     else
       trigger_error("La vista de {$this->name} no existe", E_USER_ERROR);
   }

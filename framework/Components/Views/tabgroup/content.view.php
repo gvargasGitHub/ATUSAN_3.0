@@ -1,9 +1,19 @@
 <?php
+
+use Atusan\FileSystem\FileSystem;
+
 include 'content-begin.view.php';
 
-if (property_exists($this, 'view'))
-  include $this->owner->directory . DS . "{$this->view}.view.php";
-else {
+if (property_exists($this, 'view')) {
+  if (file_exists($this->owner->directory . DS . "{$this->view}.php"))
+    include $this->owner->directory . DS . "{$this->view}.php";
+  else {
+    $located = FileSystem::locateFile(APP_DIRECTORY, basename($this->view), 'php');
+    if (!$located) trigger_error("La vista {$this->view} no existe", E_USER_ERROR);
+
+    include $located[0];
+  }
+} else {
   foreach ($this->components as $component) {
     if ($component instanceof Atusan\Module\ModuleInterface)
       if ($component instanceof Atusan\Module\NestedModule)

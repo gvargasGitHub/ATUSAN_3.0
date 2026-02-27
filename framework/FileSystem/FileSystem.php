@@ -2,32 +2,57 @@
 
 namespace Atusan\FileSystem;
 
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use ReflectionClass;
+
 class FileSystem
 {
   /**
-   * Get Applications Directory
+   * Get Class Directory (ChatGPT)
    */
-  static public function getApplicationDirectory(): array
+  public static function getClassDirectory($object)
   {
-    if (!is_dir(APP_ROOT . '/application/'))
-      trigger_error('Directorio "application" no existe.', E_USER_ERROR);
+    $r = new ReflectionClass(get_class($object));
 
-    $appsDir = scandir(APP_ROOT . '/application/');
-
-    if ($appsDir === false) trigger_error('El sistema no puede encontrar la carpeta específica "application"', E_USER_ERROR);
-
-    array_splice($appsDir, 0, 2);
-
-    if (count($appsDir) == 0) trigger_error('No existe ninguna aplicación.', E_USER_ERROR);
-
-    return $appsDir;
+    return dirname($r->getFileName());
   }
 
   /**
-   * 
+   * localeFile (Gemini)
    */
-  public static function getFirstApplicationDirectory(): string
+  public static function locateFile($rootPath, $searchTerm, $extension = null)
   {
-    return self::getApplicationDirectory()[0];
+    if (!is_dir($rootPath)) {
+      return false;
+    }
+
+    $resultados = [];
+    $directory = new RecursiveDirectoryIterator($rootPath);
+    $iterator = new RecursiveIteratorIterator($directory);
+
+    // Normalizamos la extensión (quitamos el punto si el usuario lo puso)
+    if ($extension) {
+      $extension = ltrim(strtolower($extension), '.');
+    }
+
+    foreach ($iterator as $file) {
+      if ($file->isFile()) {
+        $nombreArchivo = $file->getFilename();
+        $extActual = strtolower($file->getExtension());
+
+        // 1. Verificamos si el nombre coincide (parcial)
+        $coincideNombre = stripos($nombreArchivo, $searchTerm) !== false;
+
+        // 2. Verificamos si la extensión coincide (si se proporcionó una)
+        $coincideExt = ($extension === null) || ($extActual === $extension);
+
+        if ($coincideNombre && $coincideExt) {
+          $resultados[] = $file->getRealPath();
+        }
+      }
+    }
+
+    return !empty($resultados) ? $resultados : false;
   }
 }
