@@ -86,7 +86,7 @@ class ModuleBase extends OwnerBase {
         fd.append(key, options.data[key]);
       }
     }
-    var headers = (fd.has('csrf')) ? { 'X-CSRF-TOKEN': fd.get('csrf') } : {};
+    var headers = (fd.has('csrf_token')) ? { 'X-CSRF-TOKEN': fd.get('csrf_token') } : {};
     ats.startLoader();
     $.ajax({
       url,

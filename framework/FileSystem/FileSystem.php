@@ -55,4 +55,29 @@ class FileSystem
 
     return !empty($resultados) ? $resultados : false;
   }
+
+  /**
+   * Copy Recursive
+   */
+  protected static function copyR($path, $dest)
+  {
+    if (is_dir($path)) {
+      mkdir($dest, '0777', true);
+      $objects = scandir($path);
+      if (sizeof($objects) > 0) {
+        foreach ($objects as $file) {
+          if ($file == "." || $file == "..")
+            continue;
+          if (is_dir($path . DS . $file))
+            self::copyR($path . DS . $file, $dest . DS . $file);
+          else
+            copy($path . DS . $file, $dest . DS . $file);
+        }
+      }
+      return true;
+    } elseif (is_file($path))
+      return copy($path, $dest);
+    else
+      return false;
+  }
 }

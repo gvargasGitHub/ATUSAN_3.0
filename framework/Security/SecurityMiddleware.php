@@ -2,18 +2,22 @@
 
 namespace Atusan\Security;
 
+use Atusan\Log\Log;
 use Atusan\Request\OutgoingRequest;
 use Atusan\Response\Response;
 use Atusan\Session\AppSession;
 
 class SecurityMiddleware
 {
+  /**
+   * Handle
+   * Bootstrap -> Kernel::execute
+   */
   public static function handle(OutgoingRequest $request): void
   {
     self::startSession();
     self::securityHeaders();
     self::checkHttpMethod($request);
-    // self::checkCsrf($request);
   }
 
   private static function startSession(): void
@@ -21,6 +25,8 @@ class SecurityMiddleware
     if (session_status() !== PHP_SESSION_ACTIVE) {
       AppSession::start();
     }
+
+    Log::info('Sesion iniciada');
   }
 
   private static function securityHeaders(): void
@@ -38,22 +44,6 @@ class SecurityMiddleware
     if (!in_array($request->method(), $allowed, true)) {
       http_response_code(405);
       exit(Response::instance()->error('Método ' . $request->method() . ' no permitido.'));
-    }
-  }
-
-  private static function checkCsrf(OutgoingRequest $request): void
-  {
-    if (!in_array($request->method(), ['POST', 'PUT', 'DELETE'], true)) {
-      return;
-    }
-
-    $token =
-      $request->get('csrf_token') ??
-      $request->header('X-CSRF-TOKEN');
-
-    if (!Csrf::validate($token)) {
-      http_response_code(403);
-      exit(Response::instance()->error('Acción prohibida.'));
     }
   }
 

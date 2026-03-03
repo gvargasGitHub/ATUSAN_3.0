@@ -37,7 +37,7 @@ class DataFormControl extends DataViewControlBase
   protected function Csrf()
   {
 ?>
-    <Input type="hidden" id="<?= $this->view->name ?>-csrf" name="csrf" value="<?= $this->getValue() ?>" />
+    <Input type="hidden" id="<?= $this->view->name ?>-csrf_token" name="csrf_token" value="<?= $this->getValue() ?>" />
   <?php
   }
 

@@ -442,7 +442,7 @@ class DataForm extends DataViewBase {
 
     var fd = new FormData(ev.target);
 
-    var headers = (fd.has('csrf')) ? { 'X-CSRF-TOKEN': fd.get('csrf') } : {};
+    var headers = (fd.has('csrf_token')) ? { 'X-CSRF-TOKEN': fd.get('csrf_token') } : {};
 
     $.ajax({
       url: route,
