@@ -144,7 +144,9 @@ class DataGridControl extends DataViewControlBase
       <?= $this->xml->buildPairs(' ', '=', '"', 'html') ?>
       style="<?= $this->xml->buildPairs(';', ':', '', 'css') ?>">
       <label class="switch" id="<?= $this->getId() ?>-switch">
-        <Input type="checkbox" class="changeEv" id="<?= $this->getId() ?>-input" name="<?= $this->name ?>" value="<?= $this->getValue() ?>" <?= $selected ?> />
+        <Input type="checkbox" class="changeEv" id="<?= $this->getId() ?>-input"
+          name="<?= $this->name ?>" value="<?= $this->getValue() ?>" <?= $selected ?>
+          <?= $this->xml->buildPairs(' ', '=', '"', 'html') ?> />
         <Span class="slider" id="<?= $this->getId() ?>-slider"></Span>
       </label>
     </td>

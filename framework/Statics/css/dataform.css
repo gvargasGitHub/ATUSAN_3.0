@@ -129,8 +129,6 @@
 .ats-dataform .switch {
   position: relative;
   display: inline-block;
-  /* width: 60px;
-  height: 34px; */
 }
 
 .ats-dataform .switch input {
@@ -149,15 +147,11 @@
   background-color: #ccc;
   -webkit-transition: .4s;
   transition: .4s;
-
-  /* border-radius: 34px; */
 }
 
 .ats-dataform .switch span.slider:before {
   position: absolute;
   content: "";
-  /* height: 26px;
-  width: 26px; */
   left: 4px;
   bottom: 4px;
   background-color: white;
@@ -165,14 +159,6 @@
   transition: .4s;
 
   border-radius: 50%;
-}
-
-.ats-dataform .switch input:checked+.slider {
-  background-color: green;
-}
-
-.ats-dataform .switch input:focus+.slider {
-  box-shadow: 0 0 1px green;
 }
 
 .ats-dataform .switch input:checked+.slider::before {

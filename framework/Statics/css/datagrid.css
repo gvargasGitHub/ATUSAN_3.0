@@ -102,14 +102,6 @@
   border-radius: 50%;
 }
 
-.ats-datagrid .switch input:checked+.slider {
-  background-color: green;
-}
-
-.ats-datagrid .switch input:focus+.slider {
-  box-shadow: 0 0 1px green;
-}
-
 .ats-datagrid .switch input:checked+.slider::before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
