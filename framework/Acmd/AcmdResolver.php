@@ -73,11 +73,11 @@ class AcmdResolver
     // Copia recursos CSS y JS
     FileSystem::copyR(
       ACMD_ROOT . DS . 'templates' . DS . 'statics' . DS . 'css',
-      APP_ROOT . DS . 'public' . DS . 'css' . DS . $pairs['--name']
+      APP_ROOT . DS . 'public' . DS . $pairs['--name'] . DS . 'css'
     );
     FileSystem::copyR(
       ACMD_ROOT . DS . 'templates' . DS . 'statics' . DS . 'js',
-      APP_ROOT . DS . 'public' . DS . 'js' . DS . $pairs['--name']
+      APP_ROOT . DS . 'public' . DS . $pairs['--name'] . DS . 'js'
     );
 
     // Copia archivo .env
