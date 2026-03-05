@@ -6,6 +6,8 @@ class AcmdController
 {
   /**
    * Handle
+   * Arma los pares de argumento=>valor y se los pasa la instancia
+   * de AcmdResolver, la cual contiene los métodos de cada comando.
    */
   public static function handle(array $argv): AcmdResolver
   {
@@ -20,7 +22,7 @@ class AcmdController
     // Salta cada 2 posiciones porque evalua argumento valor
     for ($p = 2; $p < $nof; $p += 2) {
       // valida sintaxis --argumento
-      if (!preg_match('/^(--[a-z]+$/', $argv[$p])) {
+      if (!preg_match('/^--[a-z]+$/', $argv[$p])) {
         throw new AcmdException("El argumento {$argv[$p]} no es válido.");
       }
       $v = $p + 1;
@@ -29,7 +31,7 @@ class AcmdController
         throw new AcmdException("{$argv[$p]} requiere de dato.");
       }
       // valida sintaxis valor o "valor con espacios"
-      if (!preg_match('/(?:[^\s"]+|"[^"]*"))/', $argv[$v])) {
+      if (!preg_match('/(?:[^\s"]+|"[^"]*")/', $argv[$v])) {
         throw new AcmdException("{$argv[$v]} no es válido");
       }
 
@@ -44,7 +46,7 @@ class AcmdController
    */
   public static function run(AcmdResolver $resolver)
   {
-    $resolver->cmd();
+    $resolver->executeCommand();
   }
 }
 

@@ -23,7 +23,7 @@ abstract class Application extends OwnerBase implements ApplicationInterface
   protected function setXmlReference()
   {
     # El archivo XML de una Aplicación siempre será "manifest.xml"
-    $this->xmlRef = $this->directory . '/manifest.xml';
+    $this->xmlRef = $this->directory . DS . 'Manifest.xml';
   }
 
   const FONT_RESOURCES =

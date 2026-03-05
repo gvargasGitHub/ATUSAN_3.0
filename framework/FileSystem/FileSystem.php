@@ -59,7 +59,7 @@ class FileSystem
   /**
    * Copy Recursive
    */
-  protected static function copyR($path, $dest)
+  public static function copyR($path, $dest)
   {
     if (is_dir($path)) {
       mkdir($dest, '0777', true);
@@ -71,11 +71,25 @@ class FileSystem
           if (is_dir($path . DS . $file))
             self::copyR($path . DS . $file, $dest . DS . $file);
           else
-            copy($path . DS . $file, $dest . DS . $file);
+            self::copy($path . DS . $file, $dest . DS . $file);
         }
       }
       return true;
     } elseif (is_file($path))
+      return self::copy($path, $dest);
+    else
+      return false;
+  }
+
+  /**
+   * Copy File
+   */
+  public static function copy($path, $dest)
+  {
+    if (!is_dir(dirname($dest)))
+      mkdir(dirname($dest), '0777', true);
+
+    if (is_file($path))
       return copy($path, $dest);
     else
       return false;
