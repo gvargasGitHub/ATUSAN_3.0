@@ -1,0 +1,13 @@
+<?php
+
+use Atusan\Acmd\AcmdBootstrap;
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+$controller = AcmdBootstrap::app();
+
+try {
+  $controller::run($controller::handle($argv));
+} catch (Atusan\Acmd\AcmdException $ex) {
+  echo $ex->getMessage();
+}

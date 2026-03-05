@@ -7,7 +7,7 @@
 #   PERMITIR ARCHIVOS Y CARPETAS IMPORTANTES DEL PROYECTO
 # ===============================================================
 !.gitignore
-
+!acmd
 !/framework/
 !/public/.htaccess
 !/public/index.php
