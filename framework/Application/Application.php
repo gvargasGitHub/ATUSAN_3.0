@@ -53,7 +53,7 @@ abstract class Application extends OwnerBase implements ApplicationInterface
       $content .= file_get_contents(APP_ROOT . '\\framework\\Statics\\css\\' . $css) . "\n";
 
     foreach ($this->css as $css)
-      $content .= file_get_contents(APP_ROOT . '\\public\\css\\' . $css) . "\n";
+      $content .= file_get_contents(APP_ROOT . '\\public\\' . APP_NAME . '\\css\\' . $css) . "\n";
 
     return "<style>\n{$content}\n</style>";
   }
@@ -71,7 +71,7 @@ abstract class Application extends OwnerBase implements ApplicationInterface
       $content .= file_get_contents(APP_ROOT . '\\framework\\Statics\\js\\' . $js) . "\n";
 
     foreach ($this->js as $js)
-      $content .= file_get_contents(APP_ROOT . '\\public\\js\\' . $js) . "\n";
+      $content .= file_get_contents(APP_ROOT . '\\public\\' . APP_NAME . '\\js\\' . $js) . "\n";
 
     return "<script>\n{$content}\n</script>";
   }
