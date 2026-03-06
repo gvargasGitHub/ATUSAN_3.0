@@ -8,6 +8,8 @@
 # ===============================================================
 !.gitignore
 !acmd
+!composer.json
+!composer.lock
 !/framework/
 !/public/.htaccess
 !/public/index.php
