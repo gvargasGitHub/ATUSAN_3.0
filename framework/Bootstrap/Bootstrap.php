@@ -25,6 +25,21 @@ class Bootstrap
     define('APP_NAME', $_ENV['APP_NAME']);
     define('APP_DIRECTORY', APP_ROOT . DS . $_ENV['APPS_DIRECTORY'] . DS . APP_NAME);
 
+    /*
+    |--------------------------------------------------------------------------
+    | Zona horaria
+    |--------------------------------------------------------------------------
+    */
+    date_default_timezone_set('America/Mexico_City');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Manejo de errores
+    |--------------------------------------------------------------------------
+    */
+    error_reporting(E_ALL);
+    ini_set('display_errors', '1');
+
     // Autoloader específico para las clases de App
     Autoloader::init(APP_DIRECTORY);
 

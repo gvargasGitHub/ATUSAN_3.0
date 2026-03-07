@@ -10,6 +10,7 @@
 !acmd
 !composer.json
 !composer.lock
+!/cli/
 !/framework/
 !/public/.htaccess
 !/public/index.php
